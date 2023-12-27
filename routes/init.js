@@ -3,11 +3,11 @@ const router = express.Router()
 const utility = require('../config/utility')
 const ResponseSuccess = require("../response/ResponseSuccess");
 const ResponseError = require("../response/ResponseError");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const configDatabase = require("../config/configDatabase");
 const { stat, writeFile } = require("fs");
 
-const LOCK_FILE_NAME = 'DATABASE_LOCK'
+const LOCK_FILE_NAME = 'config/DB_LOCK'
 
 router.get('/', (req, res, next) => {
 
@@ -51,7 +51,7 @@ router.get('/', (req, res, next) => {
             connection.end()
         } else {
             // 如果已经初始化过了
-            res.send('该数据库已被初始化过，如果想重新初始化，请先删除项目中 <b>DATABASE_LOCK</b> 文件')
+            res.send('该数据库已被初始化过，如果想重新初始化，请先删除项目中 <b>config/DB_LOCK</b> 文件')
         }
     }))
 
