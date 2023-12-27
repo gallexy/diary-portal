@@ -233,24 +233,29 @@ router.get('/detail', (req, res, next) => {
 
 router.post('/add', (req, res, next) => {
     // 1. 验证用户信息是否正确
+    console.log('/add')
     utility
         .verifyAuthorization(req)
         .then(userInfo => {
+            console.log('/add', userInfo,'\n')
             let sqlArray = []
             let parsedTitle = utility.unicodeEncode(req.body.title) // !
             parsedTitle = parsedTitle.replaceAll(`'`, `''`)
             let parsedContent = utility.unicodeEncode(req.body.content) || ''
             parsedContent = parsedContent.replaceAll(`'`, `''`)
             let timeNow = utility.dateFormatter(new Date())
+            
             sqlArray.push(`
                     INSERT into diaries(title, content, category, weather, temperature, temperature_outside, date_create, date_modify, date, uid, is_public, is_markdown )
                     VALUES(
                         '${parsedTitle}','${parsedContent}','${req.body.category}','${req.body.weather}','${req.body.temperature || 18}',
                         '${req.body.temperatureOutside || 18}', '${timeNow}','${timeNow}','${req.body.date}','${userInfo.uid}','${req.body.isPublic || 0}', '${req.body.isMarkdown || 0}')`
             )
+            
             utility
-                .getDataFromDB( 'diary', sqlArray)
+                .getDataFromDB('diary', sqlArray)
                 .then(data => {
+                    console.log(sqlArray)
                     utility.updateUserLastLoginTime(userInfo.uid)
                     res.send(new ResponseSuccess({id: data.insertId}, '添加成功')) // 添加成功之后，返回添加后的日记 id
                 })
@@ -259,6 +264,7 @@ router.post('/add', (req, res, next) => {
                 })
         })
         .catch(errInfo => {
+            console.log(errInfo)
             res.send(new ResponseError('', errInfo))
         })
 })
