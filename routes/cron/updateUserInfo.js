@@ -5,7 +5,7 @@
  * 17 * * * * node /var/www/html/portal/routes/statistic/updateUserInfo.js
  * 意思就是每个小时的 17 分刷新用户数据
  */
-const utility = require("../../config/utility");
+const utility = require("../../lib/utility");
 utility
     .getDataFromDB('diary', [`select * from users`])
     .then(data => {

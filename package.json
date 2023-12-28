@@ -1,7 +1,7 @@
 {
   "name": "diary-portal-public",
-  "version": "1.2.2",
-  "date-modify": "2023-02-04",
+  "version": "1.3",
+  "date-modify": "2023-12-28",
   "date-init": "2022-03-21",
   "private": true,
   "scripts": {
@@ -17,9 +17,11 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "mysql": "^2.18.1",
-    "qiniu": "^7.8.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.6.5",
+    "npm": "^10.2.5",
     "pug": "2.0.0-beta11",
+    "qiniu": "^7.8.0",
     "ws": "^8.6.0"
   }
 }
