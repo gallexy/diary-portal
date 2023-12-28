@@ -133,6 +133,26 @@ npm run start
 
 <img width="539" alt="Screen Shot 2022-04-19 at 21 47 25" src="https://user-images.githubusercontent.com/12215982/164018379-bb497ec3-53e4-46c5-969a-c5b3ca4c0c31.png">
 
+docker方式启动：
+1. 首先确保系统安装了docker，没有的话执行：
+   ```sh
+   bash <(curl -sSL https://get.docker.com)
+   ```
+2. Start the Service
+
+   ```sh
+   docker compose up -d   
+
+   OR：
+
+   ```sh
+   docker run -itd \
+    -v $PWD/config/:/app/config/ \
+    --restart=unless-stopped \
+    --name diary-portal \
+    ghcr.io/gallexy/diary-portal:latest
+   ```    
+
 
 ### 4. 初始化数据库
 
