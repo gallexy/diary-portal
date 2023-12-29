@@ -1,6 +1,6 @@
-const mysql = require("mysql2");
-const configDatabase = require('../config/configDatabase')
-const configProject = require('../config/configProject')
+const mysql = require("mysql");
+const configDatabase = require('./configDatabase')
+const configProject = require('./configProject')
 
 // 运行 SQL 并返回 DB 结果
 function getDataFromDB(dbName, sqlArray, isSingleValue) {
@@ -15,10 +15,10 @@ function getDataFromDB(dbName, sqlArray, isSingleValue) {
             database: dbName
         })
         connection.connect()
-        //console.log('---- SQL', sqlArray.join(' '))
+        // console.log('---- SQL', sqlArray.join(' '))
 
         connection.query(sqlArray.join(' '), [], function (err, result) {
-            console.log('result: ', result, sqlArray.join(' '))
+            // console.log('result: ', result)
             if (err) {
                 console.log('数据库请求错误', err.message)
                 reject(err)
@@ -50,7 +50,6 @@ function verifyAuthorization(req){
             getDataFromDB( 'diary', sqlArray, true)
                 .then(userInfo => {
                     if (userInfo){
-                        console.log('verifyAuthen',userInfo,'\n')
                         resolve(userInfo) // 如果查询成功，返回 用户id
                     } else {
                         reject('身份验证失败：查无此人')
@@ -106,15 +105,12 @@ function dateFormatter(date, formatString) {
 function unicodeEncode(str){
     if(!str)return '';
     if(typeof str !== 'string') return str
-    
     let text = escape(str);
     text = text.replaceAll(/(%u[ed][0-9a-f]{3})/ig, (source, replacement) => {
         console.log('source: ',source)
         return source.replace('%', '\\\\')
     })
-    //console.log('unicodeEncoding:.....',str,text)
     return unescape(text);
-
 }
 
 // text -> unicode

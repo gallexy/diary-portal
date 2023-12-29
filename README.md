@@ -133,7 +133,7 @@ npm run start
 
 <img width="539" alt="Screen Shot 2022-04-19 at 21 47 25" src="https://user-images.githubusercontent.com/12215982/164018379-bb497ec3-53e4-46c5-969a-c5b3ca4c0c31.png">
 
-docker方式启动：
+###docker方式启动：
 1. 首先确保系统安装了docker，没有的话执行：
    ```sh
    bash <(curl -sSL https://get.docker.com)
@@ -143,7 +143,7 @@ docker方式启动：
    ```sh
    docker compose up -d   
 
-   OR：
+   或者：
 
    ```sh
    docker run -itd \
